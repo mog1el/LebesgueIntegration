@@ -9,7 +9,8 @@ bounds = []
 
 lower = float(input("Enter the lower bound of the integral"))
 higher = float(input("Enter the higher bound of the integral"))
-dy = 0.1
+dy = 0.0001
+decimal_places = len(str(dy).split(".")[1]) if "." in str(dy) else 0
 area = float(0)
 
 i = lower
@@ -23,9 +24,8 @@ while i < higher:
         max = fv
     i += dy
 
-i = lower
+#i = lower
 absmin = min
-print(min, max)
 #fin = []
 #while min <= max:
 #    while i < higher:
@@ -37,22 +37,26 @@ print(min, max)
 #    min += dy
 #    fin = []
 #    i = lower
+#
+#print(area)
+#area = float(0)
 
-#points = []
-#min = absmin
-#while min <= max:
-#    while i < higher:
-#        fv = float(f(i))
-#        if min == fv:
-#            points.append(i)
-#    i = 0
-#    if abs(min) <= abs(float(f(lower))):
-#        for i in range (1, len(points), 2):
-#            area += points[i] - points[i-1]
-#    else:
-#        for i in range (2, len(points), 2):
-#            area += points[i] - points[i-1]
-#        i += dy
-#    min += dy
+points = []
+min = absmin
+while min <= max:
+    while i <= higher:
+        fv = round(float(f(i)), decimal_places)
+        if min == fv:
+            points.append(i)
+        i += dy
+    i = lower
+    print(points)
+    if abs(min) <= abs(float(f(lower))):
+        for i in range (1, len(points), 2):
+            area += points[i] - points[i-1]
+    else:
+        for i in range (2, len(points), 2):
+            area += points[i] - points[i-1]
+    min += dy
 
 print(area)
